@@ -31,6 +31,8 @@ namespace Net_Test
         private void cbAction_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAction.SelectedIndex == DELETE) {
+                txtToDir.Text = txtFromDir.Text;
+                txtFromDir.Text = "";
                 lblToDir.Text = "Dir: ";
                 lblFromDir.Visible = false;
                 txtFromDir.Visible = false;
@@ -38,6 +40,8 @@ namespace Net_Test
                 txtToDir.Visible = true;
                 btnAction.Text = "Delete";
             } else if (cbAction.SelectedIndex == MOVE) {
+                txtFromDir.Text = txtToDir.Text;
+                txtToDir.Text = "";
                 lblFromDir.Text = "From Dir: ";
                 lblToDir.Text = "To Dir: ";
                 lblFromDir.Visible = true;
@@ -46,6 +50,8 @@ namespace Net_Test
                 txtToDir.Visible = true;
                 btnAction.Text = "Move";
             } else if (cbAction.SelectedIndex == SORT) {
+                txtToDir.Text = txtFromDir.Text;
+                txtFromDir.Text = "";
                 lblToDir.Text = "Dir: ";
                 lblFromDir.Visible = false;
                 txtFromDir.Visible = false;
@@ -53,9 +59,12 @@ namespace Net_Test
                 txtToDir.Visible = true;
                 btnAction.Text = "Sort";
             } else if (cbAction.SelectedIndex == DUMMY_FILES) {
-                lblToDir.Text = "Dir: ";
-                lblFromDir.Visible = false;
-                txtFromDir.Visible = false;
+                txtFromDir.Text = txtToDir.Text;
+                txtToDir.Text = "";
+                lblToDir.Text = "# of Files: ";
+                lblFromDir.Text = "Dir: ";
+                lblFromDir.Visible = true;
+                txtFromDir.Visible = true;
                 lblToDir.Visible = true;
                 txtToDir.Visible = true;
                 btnAction.Text = "Create Files";
@@ -84,16 +93,26 @@ namespace Net_Test
             DirectoryInfo di = new DirectoryInfo(path);
 
             int numOfFiles = di.GetFiles().Length;
+            int failedFiles = 0;
+            int failedDir = 0;
 
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
+            foreach (FileInfo file in di.GetFiles()) {
+                try {
+                    file.Delete();
+                } catch {
+                    failedFiles++;
+                }
             }
 
-            foreach (DirectoryInfo dir in di.GetDirectories())
-            {
-                dir.Delete(true);
+            foreach (DirectoryInfo dir in di.GetDirectories()) {
+                try {
+                    dir.Delete(true);
+                } catch {
+                    failedDir++;
+                }
             }
+
+            MessageBox.Show(failedFiles + " files couldn't be deleted.\n" + failedDir + " directories couldn't be deleted.");
         }
 
         private void Move() {
@@ -105,7 +124,43 @@ namespace Net_Test
         }
 
         private void CreateDummyFiles() {
+            String path = txtFromDir.Text;
 
+            if (!Directory.Exists(path)) {
+                MessageBox.Show("Directory doesn't exsist.");
+                return;
+            }
+
+            int numOfFiles = 0;
+            try {
+                numOfFiles = Convert.ToInt32(txtToDir.Text);
+            } catch {
+                MessageBox.Show("Invalid number. Please try again.");
+                return;
+            }
+
+            Random rnd = new Random();
+            int num;
+            String Ext = ".txt";
+
+            for (int i = 1; i < numOfFiles + 1; i++) {
+
+                num = rnd.Next(3);
+
+                if (num == 0) {
+                    Ext = ".txt";
+                } else if (num == 1) {
+                    Ext = ".mp4";
+                } else if (num == 2) {
+                    Ext = ".bmp";
+                } else if (num == 3) {
+                    Ext = ".pdf";
+                }
+
+                if (!File.Exists(path + i.ToString() + Ext)) {
+                    File.Create(path + i.ToString() + Ext);
+                }
+            }
         }
     }
 }

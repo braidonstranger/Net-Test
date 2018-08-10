@@ -26,7 +26,12 @@ namespace Net_Test
 
                 WebClient wc = new WebClient();
 
-                if (SHA256Converter((wc.DownloadString("https://staela.net/files/himom.txt")).Substring(0, (wc.DownloadString("https://staela.net/files/himom.txt")).Length - 1)) == SHA256Converter(MD5Converter(textBox1.Text))) {
+                //MessageBox.Show(textBox1.Text);
+                //MessageBox.Show(MD5Converter(textBox1.Text));
+                //MessageBox.Show(SHA256Converter(MD5Converter(textBox1.Text)));
+                //MessageBox.Show(SHA512Converter(SHA256Converter(MD5Converter(textBox1.Text))));
+
+                if (SHA512Converter(SHA256Converter((wc.DownloadString("https://staela.net/files/himom.txt")).Substring(0, (wc.DownloadString("https://staela.net/files/himom.txt")).Length - 1))) == SHA512Converter(SHA256Converter(MD5Converter(textBox1.Text)))) {
                     Thread t = new Thread(new ThreadStart(() => {
                         Application.Run(new Form2());
                     }));
@@ -37,7 +42,7 @@ namespace Net_Test
                     textBox1.Text = "";
                 }
 
-            } catch (Exception ex) {
+            } catch {
                 MessageBox.Show("Unable to login at this moment.  Please try again later.");
             }
         }
@@ -56,8 +61,7 @@ namespace Net_Test
             return str.ToString();
         }
 
-        protected String SHA256Converter (String text)
-        {
+        protected String SHA256Converter (String text) {
             SHA256CryptoServiceProvider sha = new SHA256CryptoServiceProvider();
             sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
             byte[] result = sha.Hash;
@@ -67,6 +71,17 @@ namespace Net_Test
                 str.Append(result[i].ToString("x2"));
             }
 
+            return str.ToString();
+        }
+
+        protected String SHA512Converter (String text) {
+            SHA512CryptoServiceProvider sha = new SHA512CryptoServiceProvider();
+            sha.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+            byte[] result = sha.Hash;
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < result.Length; i ++) {
+                str.Append(result[i].ToString("x2"));
+            }
             return str.ToString();
         }
     }

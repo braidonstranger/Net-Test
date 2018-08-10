@@ -46,7 +46,7 @@
             "Sort",
             "Dummy Files"});
             this.cbAction.Location = new System.Drawing.Point(52, 11);
-            this.cbAction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbAction.Margin = new System.Windows.Forms.Padding(2);
             this.cbAction.Name = "cbAction";
             this.cbAction.Size = new System.Drawing.Size(293, 21);
             this.cbAction.TabIndex = 0;
@@ -75,7 +75,7 @@
             // txtFromDir
             // 
             this.txtFromDir.Location = new System.Drawing.Point(68, 33);
-            this.txtFromDir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFromDir.Margin = new System.Windows.Forms.Padding(2);
             this.txtFromDir.Name = "txtFromDir";
             this.txtFromDir.Size = new System.Drawing.Size(194, 20);
             this.txtFromDir.TabIndex = 3;
@@ -83,7 +83,7 @@
             // txtToDir
             // 
             this.txtToDir.Location = new System.Drawing.Point(68, 54);
-            this.txtToDir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtToDir.Margin = new System.Windows.Forms.Padding(2);
             this.txtToDir.Name = "txtToDir";
             this.txtToDir.Size = new System.Drawing.Size(194, 20);
             this.txtToDir.TabIndex = 5;
@@ -101,7 +101,7 @@
             // btnAction
             // 
             this.btnAction.Location = new System.Drawing.Point(266, 56);
-            this.btnAction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAction.Margin = new System.Windows.Forms.Padding(2);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(79, 19);
             this.btnAction.TabIndex = 6;
@@ -121,7 +121,7 @@
             this.Controls.Add(this.lblFromDir);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbAction);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "File Editor";
