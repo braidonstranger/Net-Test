@@ -31,7 +31,7 @@ namespace Net_Test
                 //MessageBox.Show(SHA256Converter(MD5Converter(textBox1.Text)));
                 //MessageBox.Show(SHA512Converter(SHA256Converter(MD5Converter(textBox1.Text))));
 
-                if (SHA512Converter(SHA256Converter((wc.DownloadString("https://staela.net/files/himom.txt")).Substring(0, (wc.DownloadString("https://staela.net/files/himom.txt")).Length - 1))) == SHA512Converter(SHA256Converter(MD5Converter(textBox1.Text)))) {
+                if ((wc.DownloadString("https://staela.net/files/himom.txt").Substring(0, (wc.DownloadString("https://staela.net/files/himom.txt")).Length - 1)) == SHA512Converter(SHA256Converter(MD5Converter(textBox1.Text)))) {
                     Thread t = new Thread(new ThreadStart(() => {
                         Application.Run(new Form2());
                     }));
@@ -83,6 +83,11 @@ namespace Net_Test
                 str.Append(result[i].ToString("x2"));
             }
             return str.ToString();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.Select();
         }
     }
 }

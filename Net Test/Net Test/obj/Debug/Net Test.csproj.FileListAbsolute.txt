@@ -30,3 +30,4 @@ C:\Users\braidon\Documents\GitHub\Net-Test\Net Test\Net Test\obj\Debug\Net Test.
 C:\Users\braidon\Documents\GitHub\Net-Test\Net Test\Net Test\bin\Debug\Net Test.exe.config
 C:\Users\braidon\Documents\GitHub\Net-Test\Net Test\Net Test\bin\Debug\Net Test.exe
 C:\Users\braidon\Documents\GitHub\Net-Test\Net Test\Net Test\bin\Debug\Net Test.pdb
+C:\Users\Braidon\Documents\GitHub\Net-Test\Net Test\Net Test\obj\Debug\Net_Test.Form3.resources
